@@ -1,0 +1,140 @@
+@extends('layouts.base')
+@section('content')
+  <!-- Début Toolbar -->
+    <div class="pb-5">
+      <!-- Conteneur de la toolbar -->
+      <div class="kt-container-fixed flex items-center justify-between flex-wrap gap-3">
+        <!-- Titre -->
+        <div class="flex items-center flex-wrap gap-1.5 lg:gap-2.5">
+            <h1 class="text-lg text-foreground font-semibold">
+                Liste des agences
+            </h1>
+        </div>
+        <div class="flex items-center flex-wrap gap-1.5 lg:gap-2.5">
+            <!-- Barre de recherche -->
+            <div class="flex items-center gap-3 grow max-w-[600px]">
+              <div class="kt-input w-full">
+                <i class="ki-filled ki-magnifier"></i>
+                <input type="text" placeholder="Rechercher" />    
+              </div>
+              <button class="kt-btn kt-btn-primary" data-kt-drawer-toggle="#drawers_shop_filter">
+                  Rechercher
+              </button>
+            </div>
+            
+        </div>
+      </div>
+      <!-- Fin conteneur de la toolbar -->
+    </div>
+  <!-- Fin Toolbar -->
+<!-- Debut du bloc contenant tableau -->
+ <!-- Container -->
+       <div class="kt-container-fixed">
+        <div class="grid gap-5 lg:gap-7.5">
+         <div class="kt-card kt-card-grid min-w-full">
+          <div class="kt-card-header flex-wrap gap-2 py-5 ">
+           <div class="flex flex-wrap gap-2 lg:gap-5">
+            <div class="flex flex-wrap gap-2.5">
+             <select class="kt-select w-36" data-kt-select="true" data-kt-select-placeholder="Par rôle">
+              <option value="1">
+                Option 1
+              </option>
+              <option value="2">
+                Option 2
+              </option>
+              <option value="2">
+               Option 3
+              </option>
+             </select>
+             <button class="kt-btn kt-btn-outline kt-btn-primary">
+              <i class="ki-filled ki-setting-4">
+              </i>
+              Trier
+             </button>
+            </div>
+           </div>
+          </div>
+          <!-- Fin Titre + boutons en-tête tableau-->
+          <div class="kt-card-content">
+           <div data-kt-datatable="true" data-kt-datatable-state-save="false" id="team_crew_table">
+            <div class="kt-scrollable-x-auto">
+             <table class="kt-table table-auto kt-table-border" data-kt-datatable-table="true">
+              <thead>
+               <tr>
+                <th class="min-w-[180px]">
+                 <span class="kt-table-col">
+                  <span class="kt-table-col-label">
+                    <!--ajouter-->
+                  </span>
+                  <span class="kt-table-col-sort">
+                  </span>
+                 </span>
+                </th>
+                <th class="min-w-[300px]">
+                 <span class="kt-table-col">
+                  <span class="kt-table-col-label">
+                   <!--ajouter-->
+                  </span>
+                  <span class="kt-table-col-sort">
+                  </span>
+                 </span>
+                </th>
+                <th class="min-w-[180px]">
+                 <span class="kt-table-col">
+                  <span class="kt-table-col-label">
+                   <!--ajouter-->
+                  </span>
+                  <span class="kt-table-col-sort">
+                  </span>
+                 </span>
+                </th>
+                <th class="min-w-[180px]">
+                 <span class="kt-table-col">
+                  <span class="kt-table-col-label">
+                 <!--ajouter-->
+                  </span>
+                  <span class="kt-table-col-sort">
+                  </span>
+                 </span>
+                </th>
+                <th class="w-[60px]">
+                </th>
+               </tr>
+              </thead>
+              <tbody>
+               <tr> 
+                <td>
+                </td>
+                <td class="text-foreground font-normal">
+                </td>
+               </tr>
+              </tbody>
+             </table>
+            </div>
+            <div class="kt-card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-secondary-foreground text-sm font-medium">
+             <div class="flex items-center gap-2 order-2 md:order-1">
+              Afficher
+              <select class="kt-select w-16" data-kt-datatable-size="true" data-kt-select="" name="perpage">
+              </select>
+              par page
+             </div>
+             <div class="flex items-center gap-4 order-1 md:order-2">
+              <span data-kt-datatable-info="true">
+              </span>
+              <div class="kt-datatable-pagination" data-kt-datatable-pagination="true">
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+       
+       <!--Grid pour ajouter des composants plus tard-->
+         <!--<div class="grid lg:grid-cols-2 gap-5 lg:gap-7.5">  
+         </div>-->
+
+        </div>
+       </div>
+       <!-- End of Container -->
+  
+@endsection

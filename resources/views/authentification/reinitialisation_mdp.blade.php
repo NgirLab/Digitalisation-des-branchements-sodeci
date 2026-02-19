@@ -1,0 +1,80 @@
+@extends('layouts.auth')
+
+@section('content')
+
+  <meta content="Enter email to reset password, using Tailwind CSS" name="description"/>
+  
+ <body class="antialiased flex h-full text-base text-foreground bg-background">
+  <!-- Theme Mode -->
+  <script>
+   const defaultThemeMode = 'light'; // light|dark|system
+			let themeMode;
+
+			if (document.documentElement) {
+				if (localStorage.getItem('kt-theme')) {
+					themeMode = localStorage.getItem('kt-theme');
+				} else if (
+					document.documentElement.hasAttribute('data-kt-theme-mode')
+				) {
+					themeMode =
+						document.documentElement.getAttribute('data-kt-theme-mode');
+				} else {
+					themeMode = defaultThemeMode;
+				}
+
+				if (themeMode === 'system') {
+					themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light';
+				}
+
+				document.documentElement.classList.add(themeMode);
+			}
+  </script>
+  <!-- End of Theme Mode -->
+  <!-- Page -->
+  <style>
+   .page-bg {
+			background-image: url('{{ URL::asset('assets/media/images/2600x1200/bg-10.png') }}');
+		}
+		.dark .page-bg {
+			background-image: url('{{ URL::asset('assets/media/images/2600x1200/bg-10-dark.png') }}');
+		}
+  </style>
+  <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
+   <div class="kt-card max-w-[370px] w-full">
+    <form action="#" class="kt-card-content flex flex-col gap-5 p-10" id="reset_password_enter_email_form" method="post">
+     <div class="text-center">
+      <h3 class="text-lg font-medium text-mono">
+       Your Email
+      </h3>
+      <span class="text-sm text-secondary-foreground">
+       Enter your email to reset password
+      </span>
+     </div>
+     <div class="flex flex-col gap-1">
+      <label class="kt-form-label font-normal text-mono">
+       Email
+      </label>
+      <input class="kt-input" placeholder="email@email.com" type="text" value=""/>
+     </div>
+     <a class="kt-btn kt-btn-primary flex justify-center grow" href="html/demo8/authentication/classic/reset-password/check-email.html">
+      Continue
+      <i class="ki-filled ki-black-right">
+      </i>
+     </a>
+    </form>
+   </div>
+  </div>
+  <!-- End of Page -->
+  <!-- Scripts -->
+  <script src="{{ URL::asset('assets/js/core.bundle.js') }}">
+  </script>
+  <script src="{{ URL::asset('assets/vendors/ktui/ktui.min.js') }}">
+  </script>
+  <script src="{{ URL::asset('assets/vendors/apexcharts/apexcharts.min.js') }}">
+  </script>
+  <!-- End of Scripts -->
+ </body>
+</html>
+@endsection 

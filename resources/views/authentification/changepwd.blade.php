@@ -1,0 +1,106 @@
+@extends('layouts.auth')
+
+@section('content')
+
+ <body class="antialiased flex h-full text-base text-foreground bg-background">
+  <!-- Theme Mode -->
+  <script>
+   const defaultThemeMode = 'light'; // light|dark|system
+			let themeMode;
+
+			if (document.documentElement) {
+				if (localStorage.getItem('kt-theme')) {
+					themeMode = localStorage.getItem('kt-theme');
+				} else if (
+					document.documentElement.hasAttribute('data-kt-theme-mode')
+				) {
+					themeMode =
+						document.documentElement.getAttribute('data-kt-theme-mode');
+				} else {
+					themeMode = defaultThemeMode;
+				}
+
+				if (themeMode === 'system') {
+					themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light';
+				}
+
+				document.documentElement.classList.add(themeMode);
+			}
+  </script>
+  <!-- End of Theme Mode -->
+  <!-- Page -->
+  <style>
+   .page-bg {
+			background-image: url('{{ URL::asset('assets/media/images/2600x1200/bg-10.png') }}');
+		}
+		.dark .page-bg {
+			background-image: url('{{ URL::asset('assets/media/images/2600x1200/bg-10-dark.png') }}');
+		}
+  </style>
+  <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
+   <div class="kt-card max-w-[370px] w-full">
+    <form action="#" class="kt-card-content flex flex-col gap-5 p-10" id="reset_password_change_password_form" method="post">
+     <div class="text-center">
+      <h3 class="text-lg font-medium text-mono">
+       Reset Password
+      </h3>
+      <span class="text-sm text-secondary-foreground">
+       Enter your new password
+      </span>
+     </div>
+     <div class="flex flex-col gap-1">
+      <label class="kt-form-label text-mono">
+       New Password
+      </label>
+      <label class="kt-input" data-kt-toggle-password="true">
+       <input name="user_new_password" placeholder="Enter a new password" type="password" value=""/>
+       <div class="kt-btn kt-btn-sm kt-btn-ghost kt-btn-icon bg-transparent! -me-1.5" data-kt-toggle-password-trigger="true">
+        <span class="kt-toggle-password-active:hidden">
+         <i class="ki-filled ki-eye text-muted-foreground">
+         </i>
+        </span>
+        <span class="hidden kt-toggle-password-active:block">
+         <i class="ki-filled ki-eye-slash text-muted-foreground">
+         </i>
+        </span>
+       </div>
+      </label>
+     </div>
+     <div class="flex flex-col gap-1">
+      <label class="kt-form-label font-normal text-mono">
+       Confirm New Password
+      </label>
+      <label class="kt-input" data-kt-toggle-password="true">
+       <input name="user_confirm_password" placeholder="Re-enter a new Password" type="password" value=""/>
+       <div class="kt-btn kt-btn-sm kt-btn-ghost kt-btn-icon bg-transparent! -me-1.5" data-kt-toggle-password-trigger="true">
+        <span class="kt-toggle-password-active:hidden">
+         <i class="ki-filled ki-eye text-muted-foreground">
+         </i>
+        </span>
+        <span class="hidden kt-toggle-password-active:block">
+         <i class="ki-filled ki-eye-slash text-muted-foreground">
+         </i>
+        </span>
+       </div>
+      </label>
+     </div>
+     <button class="kt-btn kt-btn-primary flex justify-center grow">
+      Submit
+     </button>
+    </form>
+   </div>
+  </div>
+  <!-- End of Page -->
+  <!-- Scripts -->
+  <script src="{{ URL::asset('assets/js/core.bundle.js') }}">
+  </script>
+  <script src="{{ URL::asset('assets/vendors/ktui/ktui.min.js') }}">
+  </script>
+  <script src="{{ URL::asset('assets/vendors/apexcharts/apexcharts.min.js') }}">
+  </script>
+  <!-- End of Scripts -->
+ </body>
+</html>
+@endsection
