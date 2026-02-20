@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" dir="ltr" lang="fr">
+<!--Debut encodage-->
 
 <head>
     <base href="../../../../../">
@@ -11,16 +12,13 @@
         rel="canonical" />
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
     <meta content="Sign in page using Tailwind CSS" name="description" />
-    <meta content="Change password page, powered by Tailwind CSS" name="description" />
     <meta content="@keenthemes" name="twitter:site" />
     <meta content="@keenthemes" name="twitter:creator" />
     <meta content="summary_large_image" name="twitter:card" />
     <meta content="Metronic - Tailwind CSS Sign In" name="twitter:title" />
     <meta content="Sign in page using Tailwind CSS" name="twitter:description" />
     <meta content="Sign up page, powered by Tailwind CSS" name="twitter:description" />
-    <!-- LIEN MODIFIÉ -->
     <meta content="{{ URL::asset('assets/media/app/og-image.png') }}" name="twitter:image" />
-
     <meta content="https://127.0.0.1:8001/metronic-tailwind-html/demo8/authentication/classic/sign-in/index.html"
         property="og:url" />
     <meta content="en_US" property="og:locale" />
@@ -41,9 +39,9 @@
     <link href="{{ URL::asset('assets/vendors/keenicons/styles.bundle.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/css/styles.css') }}" rel="stylesheet" />
 </head>
+<!--Fin encodage-->
 
 <body class="antialiased flex h-full text-base text-foreground bg-background">
-
     <!-- Theme Mode -->
     <script>
         const defaultThemeMode = 'light'; // light|dark|system
@@ -72,7 +70,7 @@
     </script>
     <!-- Fin Theme Mode -->
 
-    <!-- Page -->
+    <!-- Background de la page pour les de theme dark/ligth -->
     <style>
         .page-bg {
             background-image: url('{{ URL::asset('assets/media/images/2600x1200/bg-7.png') }}');
@@ -82,16 +80,14 @@
             background-image: url('{{ URL::asset('assets/media/images/2600x1200/bg-10-dark.png') }}');
         }
     </style>
-
+    <!-- Debut du contenu de la page -->
     <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
         <div class="kt-card max-w-[370px] w-full opacity-50">
-
             <form action="#" class="kt-card-content flex flex-col gap-5 p-10" id="sign_in_form" method="get">
                 <div class="text-center mb-2.5">
                     <h3 class="text-lg font-medium text-mono leading-none mb-2.5">
                         Connexion
                     </h3>
-
                     <div class="flex items-center justify-center font-medium">
                         <span class="text-sm text-secondary-foreground me-1.5">
                             Besoin d'un compte?
@@ -102,7 +98,6 @@
                     </div>
                 </div>
 
-                <!--Inserer les messages d'erreurs ou alertes ici -->
                 <!-- Début Zone d'alerte ajoutée -->
                 <div id="auth-alert"
                     class="hidden rounded-lg p-4 mb-2 text-sm flex items-center gap-3 border transition-all">
@@ -175,41 +170,31 @@
 
         </div>
     </div>
-    <!-- End of Page -->
+    <!-- Fin du contenu de la page -->
 
+    <!-- Scripts additionnels -->
     <script src="{{ URL::asset('assets/js/core.bundle.js') }}"></script>
     <script src="{{ URL::asset('assets/vendors/ktui/ktui.min.js') }}"></script>
     <script src="{{ URL::asset('assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- Scripts de gestion de la connexion -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            // On cible le formulaire avec l'ID 'sign_in_form'
             const form = document.getElementById('sign_in_form');
 
-            // Elements pour l'affichage des messages
+            // Elements pour l'affichage des messages d'alerte
             const alertBox = document.getElementById('auth-alert');
             const alertText = document.getElementById('auth-alert-text');
             const alertIcon = document.getElementById('auth-alert-icon');
 
-            // --- CONFIGURATION API DISTANTE ---
-            // URL complète de l'endpoint distant
+            //  Configuration de l'API de saphir
             const REMOTE_API_URL = 'http://10.10.145.96/backend/public/index.php/api/v1/auth/login';
 
-            // Fonction utilitaire pour afficher les messages
-            function afficherMessage(message, type) {
-                // On réinitialise les classes
+            function afficherMessage(message) {
                 alertBox.className = 'rounded-lg p-4 mb-2 text-sm flex items-center gap-3 border';
-
-                if (type === 'error') {
-                    // Style Erreur (Rouge)
-                    alertBox.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
-                    alertIcon.innerHTML = '<i class="ki-filled ki-information text-xl"></i>';
-                } else {
-                    // Style Succès (Vert)
-                    alertBox.classList.add('bg-green-50', 'text-green-700', 'border-green-200');
-                    alertIcon.innerHTML = '<i class="ki-filled ki-check text-xl"></i>';
-                }
-
+                alertBox.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+                alertIcon.innerHTML = '<i class="ki-filled ki-information text-xl"></i>';
                 alertText.innerText = message;
                 alertBox.classList.remove('hidden');
             }
@@ -224,21 +209,18 @@
                     cacherMessage();
 
                     const formData = new FormData(form);
-
-                    // Préparation du payload pour l'API distante
-                    // On envoie 'email' car le champ input s'appelle 'email'
                     const payload = {
                         email: formData.get('email'),
                         password: formData.get('password')
                     };
 
-                    // Indicateur de chargement
+
                     const submitBtn = form.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerText;
                     submitBtn.innerText = 'Connexion...';
                     submitBtn.disabled = true;
 
-                    // Appel API DISTANTE
+
                     fetch(REMOTE_API_URL, {
                             method: 'POST',
                             headers: {
@@ -248,41 +230,35 @@
                             body: JSON.stringify(payload)
                         })
                         .then(response => {
+
                             if (!response.ok) {
-                                throw new Error('Erreur réseau');
+
                             }
                             return response.json();
                         })
                         .then(data => {
-                            // Nouvelle structure de réponse : { success: true, data: { access_token: "...", user: {...} } }
-
                             if (data.success && data.data && data.data.access_token) {
-                                // Succès : Récupération des données
                                 const token = data.data.access_token;
                                 const user = data.data.user;
 
-                                // Sauvegarde dans localStorage
                                 localStorage.setItem('api_token', token);
-
-                                // Sauvegarde des infos utilisateur complètes (optionnel)
                                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                                // Récupération du prénom pour l'affichage (la réponse JSON fourni 'first_name')
                                 const userName = user.first_name || user.email || 'Utilisateur';
                                 localStorage.setItem('user_name', userName);
 
-                                afficherMessage('Connexion réussie ! Bienvenue ' + userName, 'success');
+                                const messageSuccess = 'Connexion réussie ! Bienvenue ' + userName;
+                                localStorage.setItem('toast_message', messageSuccess);
 
-                                submitBtn.innerText = 'Redirection...';
+                                submitBtn.innerText = 'Connexion...';
 
                                 setTimeout(() => {
                                     window.location.href = '/dashboard';
-                                }, 1000);
+                                }, 500);
 
                             } else {
-                                // Erreur renvoyée par l'API
                                 const msg = data.message || 'Identifiants incorrects.';
-                                afficherMessage(msg, 'error');
+                                afficherMessage(msg);
 
                                 submitBtn.innerText = originalText;
                                 submitBtn.disabled = false;
@@ -290,10 +266,7 @@
                         })
                         .catch(error => {
                             console.error('Erreur:', error);
-                            // Note: Si vous avez une erreur "Failed to fetch", c'est souvent un problème CORS côté serveur distant.
-                            afficherMessage(
-                                'Erreur de connexion au serveur. Vérifiez l\'URL ou les CORS.',
-                                'error');
+                            afficherMessage('Erreur de connexion au serveur.');
                             submitBtn.innerText = originalText;
                             submitBtn.disabled = false;
                         });

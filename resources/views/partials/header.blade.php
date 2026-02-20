@@ -1,81 +1,38 @@
- <!-- Debut du Header -->
-            <header class="fixed z-10 top-0 start-0 end-0 shrink-0 bg-muted h-(--header-height) " id="header">
-                <!-- Debut header version mobile -->
-                <div class="flex lg:hidden items-center h-full">
-                    <div class="kt-container-fixed flex items-center justify-between flex-wrap gap-2 w-full">
-                        <div class="flex items-center gap-3 shrink-0">
-                            <!-- Bouton menu sidebar  -->
-                         <button class="kt-btn kt-btn-ghost kt-btn-icon size-8" data-kt-drawer-toggle="#sidebar">
-                                <i class="ki-filled ki-menu"></i>
-                            </button>
-                        <!-- Logo -->
-                        <a href="#" class="flex items-center justify-center">
-                            <img src="{{ URL::asset('assets/media/app/logo-sodeci.png') }}" class="h-10 max-w-[120px] w-auto object-contain" alt="Logo SODECI" />
-                        </a>
-                    </div>
-                        <!-- Boutons actions droite -->
-                        <div class="flex items-center gap-1.5 shrink-0">
-                            <!-- Notifications -->
-                            <button class="kt-btn kt-btn-ghost kt-btn-icon size-8" data-kt-drawer-toggle="#notifications_drawer">
-                                <i class="ki-filled ki-notification text-lg"></i>
-                            </button>
-                            @include('partials.notifications_drawer')
-                            <!-- Chat -->
-                            <button class="kt-btn kt-btn-ghost kt-btn-icon size-8" data-kt-drawer-toggle="#chat_drawer">
-                                <i class="ki-filled ki-messages text-lg"></i>
-                            </button>
-                             @include('partials.chat')
-                            <!-- User -->
-                            <div data-kt-dropdown="true" data-kt-dropdown-placement="bottom-end">
-                                <div class="cursor-pointer" data-kt-dropdown-toggle="true">
-                                    <img class="size-8 rounded-full" src="assets/media/avatars/300-2.png"/>
-                                </div>
-                                @include('partials.user_dropdown')
-                            </div>
-                           
-                        </div>
-                    </div>
+<!-- Debut du Header Unique Responsive -->
+<header class="fixed z-10 top-0 start-0 end-0 shrink-0 bg-muted h-(--header-height)" id="header">
+    <div class="kt-container-fluid flex items-center justify-between h-full gap-3">
+        <!-- Section de gauche  -->
+        <div class="flex items-center gap-2 lg:gap-3 shrink-0">
+            <button class="kt-btn kt-btn-ghost kt-btn-icon size-8 lg:hidden" data-kt-drawer-toggle="#sidebar">
+                <i class="ki-filled ki-menu"></i>
+            </button>
+            <button class="kt-btn kt-btn-ghost kt-btn-icon hidden lg:flex size-9" type="button" data-sidebar-toggle
+                aria-label="Basculer la sidebar">
+                <i class="ki-filled ki-menu text-lg"></i>
+            </button>
+            <a href="{{ url('') }}" class="flex items-center justify-center sidebar-logo-full">
+                <img src="{{ URL::asset('assets/media/app/logo-sodeci.png') }}"
+                    class="h-10 lg:h-12 max-w-[120px] lg:max-w-[160px] w-auto object-contain" alt="Logo SODECI" />
+            </a>
+        </div>
+        <!-- Section de droite -->
+        <div class="flex items-center gap-1.5 lg:gap-3 shrink-0">
+            <button class="kt-btn kt-btn-ghost kt-btn-icon size-8 lg:size-9"
+                data-kt-drawer-toggle="#notifications_drawer">
+                <i class="ki-filled ki-notification text-lg"></i>
+            </button>
+            <button class="kt-btn kt-btn-ghost kt-btn-icon size-8 lg:size-9" data-kt-drawer-toggle="#chat_drawer">
+                <i class="ki-filled ki-messages text-lg"></i>
+            </button>
+            <div data-kt-dropdown="true" data-kt-dropdown-placement="bottom-end">
+                <div id="user-avatar-icon"
+                    class="cursor-pointer size-8 lg:size-9 shrink-0 rounded-full border-2 border-green-500 bg-green-50 flex items-center justify-center text-green-600"
+                    data-kt-dropdown-toggle="true">
+                    <i class="ki-filled ki-user text-lg"></i>
                 </div>
-                <!-- Fin header version mobile -->
-
-                <!-- Header version desktop -->
-                <div class="hidden lg:flex items-center h-full w-full">
-                    <div class="flex items-center justify-between w-full px-5 gap-5">
-                        <!-- Elements gauche -->
-                        <div class="flex items-center gap-3 shrink-0">
-                            <!-- toggle element -->
-                            <button class="kt-btn kt-btn-ghost kt-btn-icon size-9" type="button" data-sidebar-toggle aria-label="Basculer la sidebar">
-                                <i class="ki-filled ki-menu text-lg"></i>
-                            </button>
-                            <!-- Logo sodeci -->
-                            <a href="{{url('')}}" class="flex items-center justify-center sidebar-logo-full">
-                                <img src="{{ URL::asset('assets/media/app/logo-sodeci.png') }}" class="h-12 max-w-[160px] w-auto object-contain" alt="Logo SODECI" />
-                            </a>  
-                        </div>
-
-                        <!-- Boutons d'action (à droite) -->
-                        <div class="flex items-center gap-3 shrink-0">
-                            <!-- Notifications -->
-                            <button class="kt-btn kt-btn-ghost kt-btn-icon size-9"
-                                    data-kt-drawer-toggle="#notifications_drawer">
-                                <i class="ki-filled ki-notification text-lg"></i>
-                            </button>
-                            <!-- Chat -->
-                            <button class="kt-btn kt-btn-ghost kt-btn-icon size-9" data-kt-drawer-toggle="#chat_drawer">
-                                <i class="ki-filled ki-messages text-lg"></i>
-                            </button>
-                            <!-- User -->
-                            <div data-kt-dropdown="true" data-kt-dropdown-placement="bottom-end">
-                                <div class="cursor-pointer" data-kt-dropdown-toggle="true">
-                                    <img class="size-9 rounded-full" src="assets/media/avatars/300-2.png"/>
-                                </div>
-                                @include('partials.user_dropdown')
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- Fin Header version desktop -->
-            </header>
-            <!-- Fin du Header -->
-             
+                @include('partials.user_dropdown')
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Fin du Header Unique Responsive -->
